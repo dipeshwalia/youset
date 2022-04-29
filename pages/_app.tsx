@@ -1,7 +1,15 @@
-import '../styles/global.css'
+import "../styles/global.css";
+import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { AppContextProvider } from "hooks/useAppContext";
+const queryClient = new QueryClient();
 
-import type { AppProps } from 'next/app'
-
-export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+export default function YouSetApp({ Component, pageProps }: AppProps) {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AppContextProvider>
+        <Component {...pageProps} />
+      </AppContextProvider>
+    </QueryClientProvider>
+  );
 }
